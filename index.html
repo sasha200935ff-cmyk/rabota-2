@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Александр Фролов — 3D Graphic Designer</title>
+  <meta name="description" content="3D graphic designer. Product & architectural visualization, character design, motion. 12 years of experience. Uzlovaya, Russia." />
+  <meta property="og:title" content="Alexander Frolov — 3D Graphic Designer" />
+  <meta property="og:description" content="Photorealistic 3D visualization, character design and motion." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body class="dark">
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <div id="loader">
+    <div class="loader-content">
+      <div class="loader-logo">AF</div>
+      <div class="loader-bar"><div class="loader-progress"></div></div>
+      <div class="loader-text">Loading experience...</div>
+    </div>
+  </div>
+
+  <div class="scroll-progress" id="scroll-progress"></div>
+
+  <header class="header">
+    <div class="logo magnetic"><a href="#hero">AF</a></div>
+    <nav class="nav">
+      <a href="#about" class="nav-link magnetic" data-ru="Обо мне" data-en="About">Обо мне</a>
+      <a href="#works" class="nav-link magnetic" data-ru="Работы" data-en="Works">Работы</a>
+      <a href="#services" class="nav-link magnetic" data-ru="Услуги" data-en="Services">Услуги</a>
+      <a href="#process" class="nav-link magnetic" data-ru="Процесс" data-en="Process">Процесс</a>
+      <a href="#order" class="nav-link magnetic" data-ru="Заказ" data-en="Order">Заказ</a>
+      <a href="#contact" class="nav-link magnetic" data-ru="Контакты" data-en="Contact">Контакты</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle magnetic" aria-label="Toggle theme"><span class="sun">☀</span><span class="moon">☾</span></button>
+      <button class="lang-toggle magnetic" aria-label="Language"><span class="lang-ru active">RU</span><span class="lang-en">EN</span></button>
+      <button class="menu-toggle magnetic" aria-label="Menu"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <div class="mobile-menu">
+    <a href="#about" class="mobile-link" data-ru="Обо мне" data-en="About">Обо мне</a>
+    <a href="#works" class="mobile-link" data-ru="Работы" data-en="Works">Работы</a>
+    <a href="#services" class="mobile-link" data-ru="Услуги" data-en="Services">Услуги</a>
+    <a href="#process" class="mobile-link" data-ru="Процесс" data-en="Process">Процесс</a>
+    <a href="#order" class="mobile-link" data-ru="Заказ" data-en="Order">Заказ</a>
+    <a href="#contact" class="mobile-link" data-ru="Контакты" data-en="Contact">Контакты</a>
+  </div>
+
+  <button class="fab-order magnetic" id="fab-order" data-ru="Заказать" data-en="Order">Заказать</button>
+
+  <main>
+    <!-- HERO -->
+    <section id="hero" class="hero">
+      <canvas id="hero-canvas"></canvas>
+      <div class="hero-content">
+        <div class="hero-badge" data-ru="3D Graphic Designer · 12 лет опыта" data-en="3D Graphic Designer · 12 years experience">3D Graphic Designer · 12 лет опыта</div>
+        <h1 class="hero-title">
+          <span class="line" data-ru="Александр" data-en="Alexander">Александр</span>
+          <span class="line accent" data-ru="Фролов" data-en="Frolov">Фролов</span>
+        </h1>
+        <p class="hero-subtitle" data-ru="Создаю фотореалистичные миры, в которых хочется жить и к которым хочется прикоснуться." data-en="I create photorealistic worlds you want to live in and touch.">Создаю фотореалистичные миры, в которых хочется жить и к которым хочется прикоснуться.</p>
+        <div class="hero-cta">
+          <a href="#works" class="btn btn-primary magnetic" data-ru="Смотреть работы" data-en="View works">Смотреть работы</a>
+          <a href="#order" class="btn btn-blue magnetic" data-ru="Обсудить проект" data-en="Discuss project">Обсудить проект</a>
+          <a href="#contact" class="btn btn-outline magnetic" data-ru="Связаться" data-en="Contact">Связаться</a>
+        </div>
+      </div>
+      <div class="scroll-indicator"><span data-ru="Листай" data-en="Scroll">Листай</span><div class="scroll-line"></div></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="about section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">01</span>
+          <h2 class="section-title" data-ru="Обо мне" data-en="About">Обо мне</h2>
+        </div>
+        <div class="about-grid">
+          <div class="about-text">
+            <p class="about-lead" data-ru="Я — Александр Дмитриевич Фролов, 3D-графический дизайнер из Узловой, Тульская область. Уже 12 лет превращаю идеи в объёмные, живые изображения." data-en="I am Alexander Dmitrievich Frolov, a 3D graphic designer from Uzlovaya, Tula Oblast. For 12 years I turn ideas into volumetric, living images.">Я — Александр Дмитриевич Фролов, 3D-графический дизайнер из Узловой, Тульская область. Уже 12 лет превращаю идеи в объёмные, живые изображения.</p>
+            <p data-ru="Специализация — фотореалистичная продуктовая и архитектурная визуализация, character design и motion. Работаю с клиентами по всему миру, сочетая техническую точность с художественным вкусом." data-en="Focus: photorealistic product and architectural visualization, character design and motion. Working with clients worldwide, combining technical precision with artistic taste.">Специализация — фотореалистичная продуктовая и архитектурная визуализация, character design и motion. Работаю с клиентами по всему миру, сочетая техническую точность с художественным вкусом.</p>
+            <div class="about-stats">
+              <div class="stat"><span class="stat-num" data-count="12">0</span><span class="stat-label" data-ru="лет опыта" data-en="years exp.">лет опыта</span></div>
+              <div class="stat"><span class="stat-num" data-count="180">0</span><span class="stat-label" data-ru="проектов" data-en="projects">проектов</span></div>
+              <div class="stat"><span class="stat-num" data-count="40">0</span><span class="stat-label" data-ru="клиентов" data-en="clients">клиентов</span></div>
+            </div>
+          </div>
+          <div class="about-skills">
+            <h3 data-ru="Инструменты" data-en="Tools">Инструменты</h3>
+            <div class="skills-cloud">
+              <span class="skill">Blender</span><span class="skill">Cinema 4D</span><span class="skill">Octane</span><span class="skill">Redshift</span><span class="skill">ZBrush</span>
+              <span class="skill">Substance</span><span class="skill">After Effects</span><span class="skill">Photoshop</span><span class="skill">Unreal Engine</span><span class="skill">Marvelous Designer</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKS -->
+    <section id="works" class="works section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">02</span>
+          <h2 class="section-title" data-ru="Избранные работы" data-en="Selected Works">Избранные работы</h2>
+          <p class="section-desc" data-ru="Концептуальные демонстрационные кейсы. Каждый — история, рассказанная светом, формой и материалом." data-en="Conceptual demonstration cases. Each is a story told through light, form and material.">Концептуальные демонстрационные кейсы. Каждый — история, рассказанная светом, формой и материалом.</p>
+        </div>
+        <div class="works-filter">
+          <button class="filter-btn active magnetic" data-filter="all" data-ru="Все" data-en="All">Все</button>
+          <button class="filter-btn magnetic" data-filter="product" data-ru="Продукт" data-en="Product">Продукт</button>
+          <button class="filter-btn magnetic" data-filter="arch" data-ru="Архитектура" data-en="Architecture">Архитектура</button>
+          <button class="filter-btn magnetic" data-filter="character" data-ru="Персонажи" data-en="Characters">Персонажи</button>
+          <button class="filter-btn magnetic" data-filter="motion" data-ru="Motion" data-en="Motion">Motion</button>
+          <button class="filter-btn magnetic" data-filter="env" data-ru="Окружение" data-en="Environment">Окружение</button>
+        </div>
+        <div class="works-grid" id="works-grid">
+          <!-- cards injected / static below -->
+          <article class="work-card" data-category="product" data-index="0">
+            <div class="work-image">
+              <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=900&q=80" alt="Haniex" loading="lazy" />
+              <div class="work-overlay"><span class="work-year">2024 · Concept</span><h3 class="work-title">Haniex</h3><p class="work-tags">Product · Tech</p></div>
+            </div>
+            <div class="work-info"><h3>Haniex</h3><p data-ru="Концептуальная фотореалистичная визуализация премиальных наушников. Полный цикл: моделирование, текстурирование, освещение." data-en="Conceptual photorealistic visualization of premium headphones. Full pipeline: modeling, texturing, lighting.">Концептуальная фотореалистичная визуализация премиальных наушников. Полный цикл: моделирование, текстурирование, освещение.</p></div>
+          </article>
+          <article class="work-card" data-category="arch" data-index="1">
+            <div class="work-image">
+              <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&q=80" alt="Aurora Residence" loading="lazy" />
+              <div class="work-overlay"><span class="work-year">2025 · Concept</span><h3 class="work-title">Aurora Residence</h3><p class="work-tags">Architecture</p></div>
+            </div>
+            <div class="work-info"><h3>Aurora Residence</h3><p data-ru="Концептуальная архитектурная визуализация современной виллы. Акцент на естественном свете и материалах." data-en="Conceptual architectural visualization of a modern villa. Focus on natural light and materials.">Концептуальная архитектурная визуализация современной виллы. Акцент на естественном свете и материалах.</p></div>
+          </article>
+          <article class="work-card" data-category="product" data-index="2">
+            <div class="work-image">
+              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=900&q=80" alt="Lumina" loading="lazy" />
+              <div class="work-overlay"><span class="work-year">2024 · Concept</span><h3 class="work-title">Lumina</h3><p class="work-tags">Packaging · Luxury</p></div>
+            </div>
+            <div class="work-info"><h3>Lumina Bottle</h3><p data-ru="Концепт 3D-визуализации флакона люксовых духов. Сложные материалы стекла и отражений." data-en="Conceptual 3D visualization of a luxury perfume bottle. Complex glass and reflection materials.">Концепт 3D-визуализации флакона люксовых духов. Сложные материалы стекла и отражений.</p></div>
+          </article>
+          <article class="work-card" data-category="character" data-index="3">
+            <div class="work-image">
+              <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=900&q=80" alt="Vertex" loading="lazy" />
+              <div class="work-overlay"><span class="work-year">2023 · Concept</span><h3 class="work-title">Vertex</h3><p class="work-tags">Character · Game</p></div>
+            </div>
+            <div class="work-info"><h3>Vertex Character</h3><p data-ru="Концепт игрового персонажа: скульптинг, ретопология, текстурирование." data-en="Game character concept: sculpting, retopology, texturing.">Концепт игрового персонажа: скульптинг, ретопология, текстурирование.</p></div>
+          </article>
+          <article class="work-card" data-category="motion" data-index="4">
+            <div class="work-image">
+              <img src="https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?w=900&q=80" alt="Echo Sphere" loading="lazy" />
+              <div class="work-overlay"><span class="work-year">2025 · Concept</span><h3 class="work-title">Echo Sphere</h3><p class="work-tags">Motion · Brand</p></div>
+            </div>
+            <div class="work-info"><h3>Echo Sphere</h3><p data-ru="Концепт motion-идентификации для технологического бренда. Абстрактные формы." data-en="Motion identity concept for a tech brand. Abstract forms.">Концепт motion-идентификации для технологического бренда. Абстрактные формы.</p></div>
+          </article>
+          <article class="work-card" data-category="env" data-index="5">
+            <div class="work-image">
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80" alt="Urban Pulse" loading="lazy" />
+              <div class="work-overlay"><span class="work-year">2024 · Concept</span><h3 class="work-title">Urban Pulse</h3><p class="work-tags">Environment</p></div>
+            </div>
+            <div class="work-info"><h3>Urban Pulse</h3><p data-ru="Концептуальный городской пейзаж будущего. Архитектура и атмосфера." data-en="Conceptual future cityscape. Architecture and atmosphere.">Концептуальный городской пейзаж будущего. Архитектура и атмосфера.</p></div>
+          </article>
+          <article class="work-card" data-category="product" data-index="6">
+            <div class="work-image">
+              <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=900&q=80" alt="Neon Drift" loading="lazy" />
+              <div class="work-overlay"><span class="work-year">2023 · Concept</span><h3 class="work-title">Neon Drift</h3><p class="work-tags">Automotive</p></div>
+            </div>
+            <div class="work-info"><h3>Neon Drift</h3><p data-ru="Концепт-кар в неоновом стиле. Драматичное освещение и материалы." data-en="Neon-style concept car. Dramatic lighting and materials.">Концепт-кар в неоновом стиле. Драматичное освещение и материалы.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox" hidden>
+      <button class="lb-close" aria-label="Close">×</button>
+      <button class="lb-prev" aria-label="Previous">‹</button>
+      <button class="lb-next" aria-label="Next">›</button>
+      <div class="lb-content">
+        <img id="lb-img" src="" alt="" />
+        <div class="lb-meta">
+          <h3 id="lb-title"></h3>
+          <p id="lb-desc"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <section id="services" class="services section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">03</span>
+          <h2 class="section-title" data-ru="Услуги" data-en="Services">Услуги</h2>
+        </div>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon">01</div>
+            <h3 data-ru="Продуктовая визуализация" data-en="Product Visualization">Продуктовая визуализация</h3>
+            <p data-ru="Фотореалистичные рендеры для e-commerce, рекламы и презентаций. Материалы, свет, ракурсы под задачу." data-en="Photorealistic renders for e-commerce, ads and presentations. Materials, light, angles tailored to the brief.">Фотореалистичные рендеры для e-commerce, рекламы и презентаций. Материалы, свет, ракурсы под задачу.</p>
+            <ul class="service-list">
+              <li data-ru="Моделирование / ретопология" data-en="Modeling / retopo">Моделирование / ретопология</li>
+              <li data-ru="PBR-материалы и освещение" data-en="PBR materials & lighting">PBR-материалы и освещение</li>
+              <li data-ru="Композитинг и ретушь" data-en="Compositing & retouch">Композитинг и ретушь</li>
+            </ul>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">02</div>
+            <h3 data-ru="Архитектурная визуализация" data-en="Architectural Visualization">Архитектурная визуализация</h3>
+            <p data-ru="Экстерьеры и интерьеры любой сложности — от эскиза до финального кадра." data-en="Exteriors and interiors of any complexity — from sketch to final frame.">Экстерьеры и интерьеры любой сложности — от эскиза до финального кадра.</p>
+            <ul class="service-list">
+              <li data-ru="Экстерьер / интерьер" data-en="Exterior / interior">Экстерьер / интерьер</li>
+              <li data-ru="Ландшафт и окружение" data-en="Landscape & environment">Ландшафт и окружение</li>
+              <li data-ru="Дневной / ночной свет" data-en="Day / night lighting">Дневной / ночной свет</li>
+            </ul>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">03</div>
+            <h3 data-ru="Character Design" data-en="Character Design">Character Design</h3>
+            <p data-ru="Персонажи для игр, анимации и рекламы. От концепта до ригга." data-en="Characters for games, animation and advertising. From concept to rig.">Персонажи для игр, анимации и рекламы. От концепта до ригга.</p>
+            <ul class="service-list">
+              <li data-ru="Скульптинг и детализация" data-en="Sculpting & detail">Скульптинг и детализация</li>
+              <li data-ru="Текстурирование" data-en="Texturing">Текстурирование</li>
+              <li data-ru="Риг и базовые позы" data-en="Rig & base poses">Риг и базовые позы</li>
+            </ul>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">04</div>
+            <h3 data-ru="Motion & 3D Animation" data-en="Motion & 3D Animation">Motion & 3D Animation</h3>
+            <p data-ru="3D-анимация, motion-графика и брендинговые ролики." data-en="3D animation, motion graphics and branding films.">3D-анимация, motion-графика и брендинговые ролики.</p>
+            <ul class="service-list">
+              <li data-ru="Product turntables" data-en="Product turntables">Product turntables</li>
+              <li data-ru="Анимированные сцены" data-en="Animated scenes">Анимированные сцены</li>
+              <li data-ru="Loop / social formats" data-en="Loop / social formats">Loop / social formats</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section id="process" class="process section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">04</span>
+          <h2 class="section-title" data-ru="Как мы работаем" data-en="How we work">Как мы работаем</h2>
+        </div>
+        <div class="process-steps">
+          <div class="process-step"><span class="step-num">01</span><h3 data-ru="Бриф" data-en="Brief">Бриф</h3><p data-ru="Цели, референсы, сроки, технические требования." data-en="Goals, references, deadlines, technical requirements.">Цели, референсы, сроки, технические требования.</p></div>
+          <div class="process-step"><span class="step-num">02</span><h3 data-ru="Концепт" data-en="Concept">Концепт</h3><p data-ru="Наброски, moodboard, выбор стиля и ракурсов." data-en="Sketches, moodboard, style and camera choices.">Наброски, moodboard, выбор стиля и ракурсов.</p></div>
+          <div class="process-step"><span class="step-num">03</span><h3 data-ru="Производство" data-en="Production">Производство</h3><p data-ru="Моделирование, материалы, свет, анимация." data-en="Modeling, materials, lighting, animation.">Моделирование, материалы, свет, анимация.</p></div>
+          <div class="process-step"><span class="step-num">04</span><h3 data-ru="Правки" data-en="Revisions">Правки</h3><p data-ru="Итерации по обратной связи, финальная полировка." data-en="Iterations from feedback, final polish.">Итерации по обратной связи, финальная полировка.</p></div>
+          <div class="process-step"><span class="step-num">05</span><h3 data-ru="Сдача" data-en="Delivery">Сдача</h3><p data-ru="Финальные файлы в нужных форматах и разрешении." data-en="Final files in required formats and resolution.">Финальные файлы в нужных форматах и разрешении.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ORDER CONFIGURATOR -->
+    <section id="order" class="order section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">05</span>
+          <h2 class="section-title" data-ru="Конфигуратор заказа" data-en="Order configurator">Конфигуратор заказа</h2>
+          <p class="section-desc" data-ru="Ориентировочная оценка. Точная стоимость — после обсуждения задачи." data-en="Preliminary estimate only. Exact price after discussing the brief.">Ориентировочная оценка. Точная стоимость — после обсуждения задачи.</p>
+        </div>
+        <div class="configurator" id="configurator">
+          <div class="config-steps-nav">
+            <button class="config-step-btn active" data-step="1">1</button>
+            <button class="config-step-btn" data-step="2">2</button>
+            <button class="config-step-btn" data-step="3">3</button>
+            <button class="config-step-btn" data-step="4">4</button>
+            <button class="config-step-btn" data-step="5">5</button>
+          </div>
+
+          <div class="config-panel active" data-panel="1">
+            <h3 data-ru="Услуга" data-en="Service">Услуга</h3>
+            <div class="config-options">
+              <label class="config-opt"><input type="radio" name="service" value="product" checked /><span data-ru="Продуктовая визуализация" data-en="Product visualization">Продуктовая визуализация</span></label>
+              <label class="config-opt"><input type="radio" name="service" value="arch" /><span data-ru="Архитектурная визуализация" data-en="Architectural visualization">Архитектурная визуализация</span></label>
+              <label class="config-opt"><input type="radio" name="service" value="character" /><span data-ru="Character design" data-en="Character design">Character design</span></label>
+              <label class="config-opt"><input type="radio" name="service" value="motion" /><span data-ru="Motion / анимация" data-en="Motion / animation">Motion / анимация</span></label>
+            </div>
+            <button class="btn btn-primary config-next magnetic" data-ru="Далее" data-en="Next">Далее</button>
+          </div>
+
+          <div class="config-panel" data-panel="2">
+            <h3 data-ru="Объём" data-en="Scope">Объём</h3>
+            <div class="form-group">
+              <label data-ru="Количество объектов / сцен" data-en="Number of objects / scenes">Количество объектов / сцен</label>
+              <input type="number" id="cfg-count" min="1" max="50" value="1" />
+            </div>
+            <div class="form-group">
+              <label data-ru="Ракурсы / длительность (сек)" data-en="Angles / duration (sec)">Ракурсы / длительность (сек)</label>
+              <input type="number" id="cfg-views" min="1" max="120" value="3" />
+            </div>
+            <div class="config-nav-btns">
+              <button class="btn btn-outline config-prev magnetic" data-ru="Назад" data-en="Back">Назад</button>
+              <button class="btn btn-primary config-next magnetic" data-ru="Далее" data-en="Next">Далее</button>
+            </div>
+          </div>
+
+          <div class="config-panel" data-panel="3">
+            <h3 data-ru="Сложность и опции" data-en="Complexity & options">Сложность и опции</h3>
+            <div class="config-options">
+              <label class="config-opt"><input type="radio" name="complexity" value="simple" checked /><span data-ru="Простая" data-en="Simple">Простая</span></label>
+              <label class="config-opt"><input type="radio" name="complexity" value="medium" /><span data-ru="Средняя" data-en="Medium">Средняя</span></label>
+              <label class="config-opt"><input type="radio" name="complexity" value="complex" /><span data-ru="Сложная" data-en="Complex">Сложная</span></label>
+            </div>
+            <div class="config-options checkboxes">
+              <label class="config-opt"><input type="checkbox" name="opt" value="animation" /><span data-ru="Анимация / turntable" data-en="Animation / turntable">Анимация / turntable</span></label>
+              <label class="config-opt"><input type="checkbox" name="opt" value="retouch" /><span data-ru="Ретушь / композитинг" data-en="Retouch / compositing">Ретушь / композитинг</span></label>
+              <label class="config-opt"><input type="checkbox" name="opt" value="rush" /><span data-ru="Срочный срок" data-en="Rush deadline">Срочный срок</span></label>
+            </div>
+            <div class="config-nav-btns">
+              <button class="btn btn-outline config-prev magnetic" data-ru="Назад" data-en="Back">Назад</button>
+              <button class="btn btn-primary config-next magnetic" data-ru="Далее" data-en="Next">Далее</button>
+            </div>
+          </div>
+
+          <div class="config-panel" data-panel="4">
+            <h3 data-ru="Срок и бюджет" data-en="Timeline & budget">Срок и бюджет</h3>
+            <div class="form-group">
+              <label data-ru="Желаемый срок" data-en="Desired timeline">Желаемый срок</label>
+              <select id="cfg-timeline">
+                <option value="standard" data-ru="Стандартный (2–4 нед.)" data-en="Standard (2–4 weeks)">Стандартный (2–4 нед.)</option>
+                <option value="fast" data-ru="Ускоренный (1–2 нед.)" data-en="Fast (1–2 weeks)">Ускоренный (1–2 нед.)</option>
+                <option value="flexible" data-ru="Гибкий" data-en="Flexible">Гибкий</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label data-ru="Ориентировочный бюджет" data-en="Approximate budget">Ориентировочный бюджет</label>
+              <select id="cfg-budget">
+                <option value="discuss" data-ru="Обсудим" data-en="To discuss">Обсудим</option>
+                <option value="low" data-ru="До 50 000 ₽" data-en="Up to $500">До 50 000 ₽</option>
+                <option value="mid" data-ru="50–150 000 ₽" data-en="$500–1500">50–150 000 ₽</option>
+                <option value="high" data-ru="150 000 ₽+" data-en="$1500+">150 000 ₽+</option>
+              </select>
+            </div>
+            <div class="estimate-box" id="estimate-box">
+              <span data-ru="Предварительная оценка:" data-en="Preliminary estimate:">Предварительная оценка:</span>
+              <strong id="estimate-value">—</strong>
+              <small data-ru="Не является офертой. Точная цена после брифа." data-en="Not an offer. Exact price after brief.">Не является офертой. Точная цена после брифа.</small>
+            </div>
+            <div class="config-nav-btns">
+              <button class="btn btn-outline config-prev magnetic" data-ru="Назад" data-en="Back">Назад</button>
+              <button class="btn btn-primary config-next magnetic" data-ru="Далее" data-en="Next">Далее</button>
+            </div>
+          </div>
+
+          <div class="config-panel" data-panel="5">
+            <h3 data-ru="Контакты и задача" data-en="Contacts & brief">Контакты и задача</h3>
+            <div class="form-group"><input type="text" id="cfg-name" required placeholder=" " /><label data-ru="Имя" data-en="Name">Имя</label></div>
+            <div class="form-group"><input type="email" id="cfg-email" required placeholder=" " /><label data-ru="Email" data-en="Email">Email</label></div>
+            <div class="form-group"><input type="text" id="cfg-tg" placeholder=" " /><label data-ru="Telegram" data-en="Telegram">Telegram</label></div>
+            <div class="form-group"><textarea id="cfg-message" rows="4" required placeholder=" "></textarea><label data-ru="Описание задачи" data-en="Task description">Описание задачи</label></div>
+            <p class="form-note" data-ru="Заявка откроет почтовый клиент с заполненным письмом. Для автоматической отправки нужно подключить Formspree / backend." data-en="This will open your email client with a pre-filled message. For automatic sending, connect Formspree or a backend.">Заявка откроет почтовый клиент с заполненным письмом. Для автоматической отправки нужно подключить Formspree / backend.</p>
+            <div class="config-nav-btns">
+              <button class="btn btn-outline config-prev magnetic" data-ru="Назад" data-en="Back">Назад</button>
+              <button class="btn btn-primary magnetic" id="cfg-submit" data-ru="Отправить заявку" data-en="Send request">Отправить заявку</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">06</span>
+          <h2 class="section-title" data-ru="FAQ" data-en="FAQ">FAQ</h2>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary data-ru="Сколько времени занимает типичный проект?" data-en="How long does a typical project take?">Сколько времени занимает типичный проект?</summary>
+            <p data-ru="Продуктовая визуализация — обычно 3–10 рабочих дней. Архитектура и character — от 1 до 4 недель в зависимости от объёма." data-en="Product visualization usually takes 3–10 working days. Architecture and character work — from 1 to 4 weeks depending on scope.">Продуктовая визуализация — обычно 3–10 рабочих дней. Архитектура и character — от 1 до 4 недель в зависимости от объёма.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-ru="Какие исходные материалы нужны?" data-en="What source materials do you need?">Какие исходные материалы нужны?</summary>
+            <p data-ru="Чертежи / CAD, фото продукта, референсы стиля, ТЗ по ракурсам и форматам. Чем точнее бриф — тем быстрее результат." data-en="Drawings / CAD, product photos, style references, camera and format requirements. The clearer the brief, the faster the result.">Чертежи / CAD, фото продукта, референсы стиля, ТЗ по ракурсам и форматам. Чем точнее бриф — тем быстрее результат.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-ru="Сколько правок входит?" data-en="How many revisions are included?">Сколько правок входит?</summary>
+            <p data-ru="Обычно 2 раунда правок в рамках согласованного ТЗ. Дополнительные итерации обсуждаются отдельно." data-en="Usually 2 revision rounds within the agreed brief. Extra iterations are discussed separately.">Обычно 2 раунда правок в рамках согласованного ТЗ. Дополнительные итерации обсуждаются отдельно.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-ru="В каких форматах отдаёте результат?" data-en="What delivery formats do you use?">В каких форматах отдаёте результат?</summary>
+            <p data-ru="PNG / TIFF / EXR для статичных кадров, MP4 / ProRes для анимации, по запросу — исходники сцен." data-en="PNG / TIFF / EXR for stills, MP4 / ProRes for animation, source scenes on request.">PNG / TIFF / EXR для статичных кадров, MP4 / ProRes для анимации, по запросу — исходники сцен.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-ru="Работаете ли удалённо с иностранными клиентами?" data-en="Do you work remotely with international clients?">Работаете ли удалённо с иностранными клиентами?</summary>
+            <p data-ru="Да. Коммуникация на русском и английском, оплата по договорённости." data-en="Yes. Communication in Russian and English, payment by agreement.">Да. Коммуникация на русском и английском, оплата по договорённости.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">07</span>
+          <h2 class="section-title" data-ru="Контакты" data-en="Contact">Контакты</h2>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <div class="contact-item">
+              <span class="contact-label">Email</span>
+              <a href="mailto:enemy1032@gmail.com" class="magnetic copyable" data-copy="enemy1032@gmail.com">enemy1032@gmail.com</a>
+            </div>
+            <div class="contact-item">
+              <span class="contact-label">Telegram</span>
+              <a href="https://t.me/uguro" target="_blank" rel="noopener" class="magnetic">@uguro</a>
+            </div>
+            <div class="contact-item">
+              <span class="contact-label" data-ru="Телефон" data-en="Phone">Телефон</span>
+              <a href="tel:+79029026769" class="magnetic copyable" data-copy="+79029026769">+7 902 902-67-69</a>
+            </div>
+            <div class="contact-item">
+              <span class="contact-label" data-ru="Локация" data-en="Location">Локация</span>
+              <span data-ru="Узловая, Тульская область, Россия" data-en="Uzlovaya, Tula Oblast, Russia">Узловая, Тульская область, Россия</span>
+            </div>
+            <div class="socials">
+              <a href="#" class="social magnetic">Behance</a>
+              <a href="#" class="social magnetic">ArtStation</a>
+              <a href="#" class="social magnetic">Instagram</a>
+            </div>
+          </div>
+          <form class="contact-form" id="contact-form">
+            <div class="form-group"><input type="text" id="name" name="name" required placeholder=" " /><label for="name" data-ru="Имя" data-en="Name">Имя</label></div>
+            <div class="form-group"><input type="email" id="email" name="email" required placeholder=" " /><label for="email">Email</label></div>
+            <div class="form-group"><textarea id="message" name="message" rows="5" required placeholder=" "></textarea><label for="message" data-ru="Сообщение" data-en="Message">Сообщение</label></div>
+            <p class="form-note" data-ru="Форма открывает mailto. Для серверной отправки подключите Formspree или свой backend." data-en="Form opens mailto. Connect Formspree or your backend for server-side sending.">Форма открывает mailto. Для серверной отправки подключите Formspree или свой backend.</p>
+            <button type="submit" class="btn btn-primary magnetic" data-ru="Отправить" data-en="Send">Отправить</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">AF</div>
+        <p data-ru="© 2026 Александр Фролов. Концептуальные работы." data-en="© 2026 Alexander Frolov. Conceptual works.">© 2026 Александр Фролов. Концептуальные работы.</p>
+        <a href="#hero" class="back-top magnetic">↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" hidden></div>
+  <script src="script.js"></script>
+</body>
+</html>
